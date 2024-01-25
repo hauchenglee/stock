@@ -1,0 +1,24 @@
+CREATE TABLE stock (
+    stock_id char(34) NOT NULL,
+    stock_no varchar(6) NOT NULL,
+    stock_name nvarchar(20) NOT NULL,
+    PRIMARY KEY(stock_id)
+);
+
+CREATE TABLE detail (
+    transaction_id char(34) NOT NULL,
+    stock_stock_id char(34) NOT NULL,
+    date char(8) NOT NULL,
+    shares_count int NOT NULL,
+    trading_volume int NOT NULL,
+    opening_price decimal(11, 2) NOT NULL,
+    highest_price decimal(11, 2) NOT NULL,
+    lowest_price decimal(11, 2) NOT NULL,
+    closing_price decimal(11, 2) NOT NULL,
+    plus_minus char(1) NOT NULL,
+    spread decimal(11, 2) NOT NULL,
+    trading_count int NOT NULL,
+    PRIMARY KEY(transaction_id),
+    FOREIGN KEY (stock_stock_id) REFERENCES stock(stock_id) ON DELETE CASCADE
+);
+

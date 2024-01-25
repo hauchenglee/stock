@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/1298322/wrong-ordering-in-generated-table-in-jpa
+https://cloud.tencent.com/developer/article/1415320

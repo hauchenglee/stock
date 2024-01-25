@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Example</title>
+</head>
+<body>
+<h1>Please input data:</h1>
+<form id="myForm">
+  <label for="name">Name: </label>
+  <input type="text" id="name" required><br>
+
+  <label for="birthday">Birthday: </label>
+  <input type="date" id="birthday" required><br>
+
+  <label for="phone">Phone: </label>
+  <input type="tel" id="phone" required><br>
+
+  <button type="button" onclick="submitForm()">Send</button>
+</form>
+
+<h1>Response your input data from backend:</h1>
+<div id="response"></div> <!-- 用於顯示後端回傳的字串 -->
+
+<script>
+  function submitForm() {
+    const name = document.getElementById('name').value;
+    const birthday = document.getElementById('birthday').value;
+    const phone = document.getElementById('phone').value;
+
+    const formData = {
+      name: name,
+      birthday: birthday,
+      phone: phone
+    };
+
+    // 將formData轉換為JSON
+    const jsonData = JSON.stringify(formData);
+
+    // 使用POST方式送出資料到localhost:8080
+    const url = 'http://localhost:8080/';
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        console.log('data is ok！');
+        displayResponse(xhr.responseText); // 將回傳的資料顯示在畫面下方
+      }
+    };
+    xhr.send(jsonData);
+  }
+
+  function displayResponse(response) {
+    const responseElement = document.getElementById('response');
+    responseElement.innerHTML = response;
+  }
+</script>
+</body>
+</html>
